@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<html lang="cs">
+<head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{% static 'jidelni_listek/css/agency.css' %}" media="screen" />
+ 
+</head>
+
+<ul>
+	
+	{% for list in lists %}
+        	<li><a href="{% url 'jidelni_listek:detail' list.id %}">{{ list.name }}</a></li>
+
+		<ul>
+		{% for product in list.sorted_products %}
+			{% ifchanged product.product_type.name %}
+			    <li><h3>{{ product.product_type.name }}</h3></li>
+			{% endifchanged %}
+			<li>{{ product.product_name }}</li>
+		{% endfor %}
+		</ul>
+
+
+	{% endfor %}
+    </ul>

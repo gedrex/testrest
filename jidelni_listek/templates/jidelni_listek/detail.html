@@ -1,0 +1,29 @@
+
+{{ var|safe|escape }}
+{% load staticfiles %}
+
+
+<p>detail</p>
+<p>{{ list.name }}</p>
+<p>list id: {{ list_id }}
+<p>id2: {{ products_by_type }}</p>
+<br />
+<ul>
+
+{% for products in products_by_type.1 %}
+	<li>{{ products.product_name}}</li>
+{% endfor %}
+</ul>
+<ul>
+{% for product in products_by_type %}
+        {% ifchanged product.product_type.name %}
+            <li><h3>{{ product.product_type.name }}</h3></li>
+        {% endifchanged %}
+	<li>{{ product.product_name }}</li>
+{% endfor %}
+</ul>
+
+{% for current in current_list %}
+                <li>{{ current.id }} : {{ current.name }} - {{ current.list_short_description }} > {{ current.types_in_list.name }}</li>
+        {% endfor %}
+</body>

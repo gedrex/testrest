@@ -1,0 +1,22 @@
+
+{{ var|safe|escape }}
+{% load staticfiles %}
+
+{% for product in products_by_type.3 %}
+        {% ifchanged product.product_type.name %}
+	<tr class="danger">
+            <th colspan="3">{{ product.product_type.name }}</th>
+	</tr>
+        {% endifchanged %}
+	<tr>
+	<td class="nazev">{{ product.product_name }}</td>
+	</tr>
+			{% if list.experience == True %}
+                                {% if product.plist %}
+                                <tr>
+                                        <td colspan="3">Doporučené pivo: {{ product.plist }}
+                                        <br />Doporučené víno: {{ product.vlist }}</td>
+                                </tr>
+                                {% endif %}
+                        {% endif %}
+{% endfor %}

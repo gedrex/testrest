@@ -1,0 +1,16 @@
+
+{{ var|safe|escape }}
+{% load staticfiles %}
+
+{% for product in products_by_type.1 %}
+        {% ifchanged product.product_type.name %}
+	<tr class="danger">
+            <th colspan="3">{{ product.product_type.name }}</th>
+	</tr>
+        {% endifchanged %}
+	<tr>
+	<td class="gramaz">{{ product.amount }}</td>
+	<td class="nazev">{{ product.product_name }}</td>
+	<td class="cena">{{ product.product_price }}</td>
+	</tr>
+{% endfor %}

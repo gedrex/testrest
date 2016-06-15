@@ -1,0 +1,20 @@
+
+{{ var|safe|escape }}
+{% load staticfiles %}
+
+{% for product in products_by_type.4 %}
+        {% ifchanged product.product_type.name %}
+	<tr class="danger">
+            <th>{{ product.product_type.name }}</th>
+	</tr>
+        {% endifchanged %}
+	<tr>
+	<td class="nazev">{{ product.product_name }}</td>
+	</tr>
+	{% for plist in product.plist.all %}
+	<tr><td>Pivní degustace: {{ plist.product_name }}</td></tr> 
+	{% endfor %}
+	{% for vlist in product.vlist.all %}
+	<tr><td>Vinná degustace: {{ vlist.product_name }}</td></tr>
+	{% endfor %}
+{% endfor %}

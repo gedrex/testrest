@@ -1,0 +1,56 @@
+
+{{ var|safe|escape }}
+{% load staticfiles %}
+
+	<tr class="danger">
+		<th colspan="3"><h5>Stálá nabídka</h5></th>
+	</tr>
+{% for product in poledni_menu_stale.1 %}
+		<tr>
+			<td class="gramaz">{{ product.amount }}</td>
+			<td class="nazev">{{ product.name }}</td>
+			<td class="cena">{{ product.price }}</td>
+		</tr>
+
+{% endfor %}
+<tr class="danger">
+                <th colspan="3"><h5>Týdenní nabídka</h5></th>
+        </tr>
+{% for product in poledni_menu_weekly.1 %}
+                <tr>
+                        <td class="gramaz">{{ product.amount }}</td>
+                        <td class="nazev">{{ product.name }}</td>
+                        <td class="cena">{{ product.price }}</td>
+                </tr>
+
+{% endfor %}
+<tr class="danger">
+                <th colspan="3"><h5>Denní nabídka</h5></th>
+        </tr>
+{% for product in poledni_menu_daily.1 %}
+	
+	
+	{% ifchanged product.valid_for_date %}
+	<tr class="danger">
+		<th colspan="3"><h5>{{ product.valid_for_date | date:"l" }}</h5></th>
+	</tr>
+		{% endifchanged %}
+		{% ifchanged product.ptype %}
+		<tr>
+			<th colspan="3">
+			{% if product.ptype == 4 %}
+			Polévka
+			{% elif product.ptype == 5 %}
+			Hlavní jídlo
+			{% endif %}
+			</th>
+		</tr>
+		{% endifchanged %}
+
+		<tr>
+			<td class="gramaz">{{ product.amount }}</td>
+			<td class="nazev">{{ product.name }}</td>
+			<td class="cena">{{ product.price }}</td>
+		</tr>
+	
+{% endfor %}
